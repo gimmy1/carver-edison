@@ -1,0 +1,38 @@
+version: '3.6'
+
+services:
+  tweets:
+    build:
+      context: ./services/tweets
+      dockerfile: Dockerfile
+    volumes:
+      - './services/tweets:/twt/src/app'
+    ports:
+      - 5001:5000
+    environment:
+      - FLASK_ENV=development
+      - APP_SETTINGS=project.config.DevelopmentConfig
+      - DATABASE_URL=postgres://postgres:postgres@tweets-db:5432/tweet_dev
+    depends_on:
+      - tweets-db
+  
+  tweets-db:
+    build:
+      context: ./services/tweets/project/db
+      dockerfile: Dockerfile
+    ports:
+      - 5435:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 80:80
+    depends_on:
+      - tweets 
+      
