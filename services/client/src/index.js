@@ -8,7 +8,7 @@ class App extends Component {
       this.getTweets();
     }
     getTweets() {
-        axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/tweets`)
+        axios.get(`${process.env.REACT_APP_TWEETS_SERVICE_URL}/tweets`)
         .then((res) => { console.log(res); })
         .catch((err) => { console.log(err); });
       }

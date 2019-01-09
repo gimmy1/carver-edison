@@ -35,4 +35,19 @@ services:
       - 80:80
     depends_on:
       - tweets 
-      
+      - client
+  
+  client:
+    build:
+      context: ./services/client
+      dockerfile: Dockerfile
+    volumes:
+      - './services/client:/twt/src/app'
+      - '/twt/src/app/node_modules'
+    ports:
+      - 3007:3000
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_TWEETS_SERVICE_URL=${REACT_APP_TWEETS_SERVICE_URL}
+    depends_on:
+      - tweets
