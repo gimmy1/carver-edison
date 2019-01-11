@@ -1,0 +1,57 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "0.0.1",
+        "title": "Carver Edison Service",
+        "description": "Swagger spec for documenting the api endpoints"
+    },
+    "servers": [
+        {
+            "url": "http://localhost"
+        }
+    ],
+    "paths":{
+        "/tweets/tweet": {
+            "get": {
+                "summary": "Tweet check",
+                "responses": {
+                    "200": {
+                        "description": "returns json of sanity check endpoint"
+                    }
+                }
+            }
+        },
+        "/flowers": {
+            "get": {
+                "summary": "Returns all Tweets",
+                "responses": {
+                    "200": {
+                        "description": "Returns all Tweet objects"
+                    }
+                }
+            }
+        },
+        "/tweets/{id}": {
+            "get": {
+                "summary": "Returns tweet based off id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID for fetch specific tweet",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Tweet object"
+                    }
+                }
+            }
+        }
+    }
+}
