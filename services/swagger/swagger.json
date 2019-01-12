@@ -21,7 +21,7 @@
                 }
             }
         },
-        "/flowers": {
+        "/tweets": {
             "get": {
                 "summary": "Returns all Tweets",
                 "responses": {

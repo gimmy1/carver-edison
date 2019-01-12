@@ -19,7 +19,6 @@ class TestTweets(BaseTestCase):
         response = self.client.get('/tweets/tweet')
         data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        # import pdb; pdb.set_trace()
         self.assertIn('tweet', data['tweet'])
     
     def test_single_tweet(self):
@@ -27,7 +26,6 @@ class TestTweets(BaseTestCase):
         # print(tweet.id)
         with self.client:
             response = self.client.get(f'/tweets/{tweet.id}')
-            # import pdb; pdb.set_trace()
             data = json.loads(response.data.decode())
             self.assertIn('Carver Edison', data['title'])
             self.assertIn('Prakash Sinha', data['name'])
@@ -47,7 +45,9 @@ class TestTweets(BaseTestCase):
         with self.client: 
             response = self.client.get(f'/tweets/')
             data = json.loads(response.data.decode())
-            self.assertEqual(len(data['tweets']), 2)
+            # import pdb; pdb.set_trace()
+            self.assertIn('Prakash Sinha', data['tweets'][0]['name'])
+            self.assertIn('Gamal Ali', data['tweets'][1]['name'])
 
 
             
